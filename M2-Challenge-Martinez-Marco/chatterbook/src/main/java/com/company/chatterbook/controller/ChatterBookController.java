@@ -74,7 +74,7 @@ public class ChatterBookController
         }
 
         // user does not exist
-        return null;
+        throw new IllegalArgumentException("User does not exist.");
     }
 
     /**
@@ -94,7 +94,7 @@ public class ChatterBookController
         }
 
         // user does not exist
-        return null;
+        throw new IllegalArgumentException("User does not exist.");
     }
 
 }
