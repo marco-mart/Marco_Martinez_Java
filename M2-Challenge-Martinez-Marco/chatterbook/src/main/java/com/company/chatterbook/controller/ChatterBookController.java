@@ -5,6 +5,7 @@ import com.company.chatterbook.models.User;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -48,17 +49,24 @@ public class ChatterBookController
 
     /**
      * GET route that returns a list of all users
-     * @return
+     * @return a list of all users on ChatterBook
      */
     @RequestMapping(value="/users", method = RequestMethod.GET)
     @ResponseStatus(value=HttpStatus.OK)
-    public List<User> getAllUsers()
+    public List<String> getAllUsers()
     {
-        return userList;
+        ArrayList<String> users = new ArrayList<>();
+        for (User user : userList)
+        {
+            users.add(user.getName());
+        }
+
+        return users;
     }
 
     /**
      * GET route that returns a single user by username
+     * @return user specified in the uri
      */
     @RequestMapping(value="/users/{username}", method=RequestMethod.GET)
     @ResponseStatus(value=HttpStatus.OK)
@@ -79,6 +87,7 @@ public class ChatterBookController
 
     /**
      * GET route that returns a list of chatterPosts for a user by username.
+     * @return ChatterPosts of the user specified in the uri
      */
     @RequestMapping(method=RequestMethod.GET, value="/users/{username}/chatterposts")
     @ResponseStatus(value=HttpStatus.OK)
